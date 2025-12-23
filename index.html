@@ -164,11 +164,11 @@
                         <div class="status-badge ${imageData.isCropped ? 'cropped' : 'uncropped'}">
                             ${imageData.isCropped ? 'Cropped' : 'Uncropped'}
                         </div>
-                    </div>
+                    </div>   
                     <div class="image-info">
                         <div class="image-size">${imageData.width} × ${imageData.height}</div>
                         <div class="image-controls">
-                            <button class="btn btn-small btn-primary crop-btn" data-index="${index}">Crop</button>
+                            <button class="btn btn-small btn-primary crop-btn" data-index="${index}">Edit</button>
                             ${imageData.isCropped ? `<button class="btn btn-small btn-secondary undo-btn" data-index="${index}">Undo</button>` : ''}
                         </div>
                     </div>
@@ -204,8 +204,8 @@
                         }
                         
                         this.cropper = new Cropper(cropImage, {
-                            aspectRatio: 1,
-                            viewMode: 1, // Restrict crop box to within the image
+                            aspectRatio: 4/5,  // เปลี่ยนจาก 1 เป็น 4/5
+                            viewMode: 1,
                             autoCropArea: 0.8,
                             responsive: true,
                             restore: false,
@@ -269,8 +269,8 @@
 
                 // Get the cropped canvas directly - it already contains the white background
                 const croppedCanvas = this.cropper.getCroppedCanvas({
-                    width: 512,
-                    height: 512,
+                    width: 1500,   // เปลี่ยนจาก 512
+                    height: 1200,  // เปลี่ยนจาก 512
                     fillColor: '#ffffff',
                     imageSmoothingEnabled: true,
                     imageSmoothingQuality: 'high'
@@ -361,11 +361,11 @@
                     const img = new Image();
                     
                     img.onload = () => {
-                        canvas.width = 512;
-                        canvas.height = 512;
+                        canvas.width = 1500;   // เปลี่ยนจาก 512
+                        canvas.height = 1200;  // เปลี่ยนจาก 512
                         ctx.fillStyle = '#ffffff';
-                        ctx.fillRect(0, 0, 512, 512);
-                        ctx.drawImage(img, 0, 0, 512, 512);
+                        ctx.fillRect(0, 0, 1200, 1500);  // เปลี่ยนขนาด fillRect
+                        ctx.drawImage(img, 0, 0, 1200, 1500);  
                         
                         canvas.toBlob((blob) => {
                             const filename = `${prefix}_${String(index + 1).padStart(3, '0')}.jpg`;
